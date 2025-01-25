@@ -1,0 +1,23 @@
+---
+import background from "../assets/background.svg";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>PortfolioDemo1</title>
+  </head>
+  <body class="dark:bg-neutral-950">
+    <img
+      class="fixed top-0 left-0 size-full -z-10 blur-2xl"
+      src={background.src}
+      alt=""
+      fetchpriority="high"
+    />
+    <slot />
+  </body>
+</html>
