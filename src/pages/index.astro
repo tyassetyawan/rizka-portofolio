@@ -18,13 +18,8 @@ import Layout from "../layouts/Layout.astro";
             Available to help you with:
           </h2>
           <div class="flex flex-col sm:flex-row gap-4 overflow-hidden relative">
-            <Card
-              className="card"
-              title="Frontend Development"
-              body="Expert in creating dynamic and responsive user interfaces using Angular and Astro. I bring your designs to life with clean, efficient, and maintainable code."
-            >
+            <Card className="card">
               <div
-                slot="icon"
                 class="rounded-full p-4 grid place-content-center bg-blue-50 text-blue-500 dark:bg-blue-950/30 dark:text-blue-700 w-fit"
               >
                 <svg
@@ -37,14 +32,19 @@ import Layout from "../layouts/Layout.astro";
                   ></path></svg
                 >
               </div>
+              <h2 class="font-semibold text-lg sm:text-xl md:text-2xl">
+                Frontend Development
+              </h2>
+              <p class="text-gray-600 text-sm sm:text-base dark:text-gray-400">
+                Expert in creating dynamic and responsive user interfaces using
+                <span class="text-blue-500 dark:text-blue-700"
+                  >Angular and Astro</span
+                >. I bring your designs to life with clean, efficient, and
+                maintainable code.
+              </p>
             </Card>
-            <Card
-              className="card"
-              title="Backend Development"
-              body="Skilled in building robust and scalable server-side applications with NestJS and Express. I ensure your backend is secure, efficient, and seamlessly integrated with your frontend."
-            >
+            <Card className="card">
               <div
-                slot="icon"
                 class="rounded-full p-4 grid place-content-center bg-yellow-50 text-yellow-500 dark:bg-yellow-950/30 dark:text-yellow-700 w-fit"
               >
                 <svg
@@ -57,6 +57,16 @@ import Layout from "../layouts/Layout.astro";
                   ></path></svg
                 >
               </div>
+              <h2 class="font-semibold text-lg sm:text-xl md:text-2xl">
+                Backend Development
+              </h2>
+              <p class="text-gray-600 text-sm sm:text-base dark:text-gray-400">
+                Skilled in building robust and scalable server-side applications
+                with <span class="text-yellow-500 dark:text-yellow-700"
+                  >NestJS and Express</span
+                >. I ensure your backend is secure, efficient, and seamlessly
+                integrated with your frontend.
+              </p>
             </Card>
           </div>
         </div>
