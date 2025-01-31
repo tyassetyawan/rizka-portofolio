@@ -119,7 +119,11 @@ import Project from "../components/Project.astro";
                 description={experience.description}
                 date={experience.dates}
               >
-                <div slot="icon" set:html={experience.svgIcon} />
+                <div
+                  slot="icon"
+                  class="size-full p-1"
+                  set:html={experience.svgIcon}
+                />
               </TimelineItem>
             ))
           }
