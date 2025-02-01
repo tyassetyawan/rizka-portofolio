@@ -1,10 +1,12 @@
 ---
 import Card from "../components/Card.astro";
 import Layout from "../layouts/Layout.astro";
-import EXPERIENCES from "../assets/collections/experiences.json";
 import TimelineItem from "../components/TimelineItem.astro";
-import PROJECTS from "../assets/collections/projects.json";
 import Project from "../components/Project.astro";
+import CardService from "../components/CardService.astro";
+import EXPERIENCES from "../assets/collections/experiences.json";
+import PROJECTS from "../assets/collections/projects.json";
+import SERVICES from "../assets/collections/services.json";
 ---
 
 <Layout>
@@ -73,10 +75,12 @@ import Project from "../components/Project.astro";
     </article>
   </section>
   <section id="about" class="flex flex-col">
-    <h2 class="text-2xl md:text-4xl font-bold text-gray-950 dark:text-white">
+    <h2
+      class="text-2xl md:text-4xl font-bold text-gray-950 dark:text-white mb-8"
+    >
       About Me
     </h2>
-    <article class="mt-4 flex flex-col md:flex-row gap-4">
+    <article class="flex flex-col md:flex-row gap-4 p-4">
       <Card className="text-gray-600 dark:text-gray-400 h-fit">
         <div class="flex flex-col gap-2 text-sm sm:text-base">
           <p>
@@ -101,7 +105,7 @@ import Project from "../components/Project.astro";
             Want to know a bit more?
           </h3>
           <a
-            href="/docs/carlos-miguel-en.pdf"
+            href="/docs/cv.pdf"
             role="button"
             aria-label="Download CV"
             download
@@ -137,7 +141,7 @@ import Project from "../components/Project.astro";
     >
       Latest Projects
     </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {
         PROJECTS.filter((__, i) => i < 3).map((project) => (
           <Project project={project} />
@@ -153,10 +157,15 @@ import Project from "../components/Project.astro";
       >
     </div>
   </section>
-  <section id="services" class="flex flex-col">
-    <h2 class="text-2xl md:text-4xl font-bold text-gray-950 dark:text-white">
+  <section id="services" class="flex flex-col overflow-hidden">
+    <h2
+      class="text-2xl md:text-4xl font-bold text-gray-950 dark:text-white mb-8"
+    >
       Services
     </h2>
+    <article class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {SERVICES.map((service) => <CardService service={service} />)}
+    </article>
   </section>
 </Layout>
 
@@ -164,18 +173,7 @@ import Project from "../components/Project.astro";
   import { animate, inView, stagger } from "motion";
 
   window.addEventListener("DOMContentLoaded", () => {
-    animate(
-      ".card",
-      {
-        translate: ["-100%", 0],
-      },
-      {
-        delay: stagger(0.1),
-        duration: 0.5,
-      }
-    );
-
-    const sectionsIds = ["#about", "#projects", "#services"];
+    const sectionsIds = ["#about", "#projects"];
 
     for (const sectionId of sectionsIds) {
       inView(sectionId, () => {
@@ -183,7 +181,7 @@ import Project from "../components/Project.astro";
           sectionId,
           {
             opacity: [0, 1],
-            transform: ["translateY(50%)", "translateY(0)"],
+            transform: ["translateY(40%)", "translateY(0)"],
           },
           {
             duration: 1,
@@ -191,5 +189,18 @@ import Project from "../components/Project.astro";
         );
       });
     }
+
+    inView("#services", () => {
+      animate(
+        ".card-service",
+        {
+          transform: ["translateY(100%)", "translateY(0)"],
+        },
+        {
+          delay: stagger(0.2),
+          duration: 0.6,
+        }
+      );
+    });
   });
 </script>
