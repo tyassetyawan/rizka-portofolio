@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 const { pathname } = Astro.url;
 
 let links: string[];
@@ -12,20 +14,31 @@ if (pathname == "/") {
 ---
 
 <header
-  class="max-w-screen-lg mx-auto flex flex-wrap justify-between py-1 px-4 sm:px-6 items-center sticky top-0 z-50 lg:rounded-b-md border border-gray-300 dark:border-neutral-800 backdrop-blur-sm"
+  class="max-w-screen-lg mx-auto flex flex-wrap justify-between py-1 px-4 sm:px-6 items-center sticky top-0 z-50 lg:rounded-b-md border border-gray-300 dark:border-neutral-800 backdrop-blur-xs"
 >
   <a href="/">
-    <img
+    <Image
       src="/logo.webp"
       class="size-16 object-contain object-center bg-transparent"
       alt="Logo"
+      width={64}
+      height={64}
+      title="Logo"
+      aria-label="Logo"
+      loading="eager"
     />
   </a>
   <div class="sm:order-2 flex items-center gap-3 text-gray-900">
-    <button id="theme-toggle" class="flex items-center gap-2 dark:text-white">
+    <button
+      title="Theme Toggle"
+      aria-label="Theme Toggle"
+      id="theme-toggle"
+      class="flex items-center gap-2 dark:text-white"
+    >
       <svg
         id="theme-sun-icon"
         class="size-5"
+        aria-label="Sun Icon"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"
@@ -37,6 +50,7 @@ if (pathname == "/") {
       <svg
         id="theme-moon-icon"
         class="size-5"
+        aria-label="Moon Icon"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 384 512"
@@ -46,8 +60,14 @@ if (pathname == "/") {
         ></path></svg
       >
     </button>
-    <button id="navbar-toggle" class="sm:hidden dark:text-white">
+    <button
+      title="Navbar Toggle"
+      aria-label="Navbar Toggle"
+      id="navbar-toggle"
+      class="sm:hidden dark:text-white"
+    >
       <svg
+        aria-label="Menu Icon"
         id="navbar-menu-icon"
         class="size-5"
         fill="currentColor"
@@ -59,6 +79,7 @@ if (pathname == "/") {
         ></path></svg
       >
       <svg
+        aria-label="Close Menu Icon"
         id="navbar-x-icon"
         class="hidden size-6"
         fill="currentColor"

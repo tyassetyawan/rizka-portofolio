@@ -1,0 +1,65 @@
+<div
+  id="successModalFade"
+  class="fixed top-0 left-0 inset-0 hidden justify-center size-full z-50"
+>
+  <div
+    id="successModal"
+    class="bg-white rounded-md dark:bg-gray-950 w-80 xs:w-96 flex flex-col p-6 h-fit mt-16"
+  >
+    <div
+      class="size-12 rounded-full bg-green-100 dark:bg-green-900 p-2 flex items-center justify-center mx-auto mb-3.5"
+    >
+      <svg
+        aria-hidden="true"
+        class="size-8 text-green-500 dark:text-green-400"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+        ><path
+          fill-rule="evenodd"
+          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+          clip-rule="evenodd"></path></svg
+      >
+    </div>
+    <p
+      class="mb-4 text-lg font-semibold text-gray-900 dark:text-white text-center"
+    >
+      I've received your message, I'll get in contact with you soon.
+    </p>
+    <button
+      type="button"
+      id="closeSuccessModal"
+      class="w-full p-2 text-white font-semibold bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:outline-hidden focus:ring-blue-300 rounded-md dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-950 transition-all duration-300"
+    >
+      Continue
+    </button>
+  </div>
+</div>
+<div
+  id="successModalBackdrop"
+  class="hidden fixed top-0 left-0 inset-0 z-40 bg-gray-950/50"
+>
+</div>
+<script>
+  import {
+    hideModal,
+    toggleModalFade,
+    MODAL_ANIMATION_DURATION_IN_MILLISECONDS,
+  } from "../utils/modal";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const closeModalBtn = document.getElementById("closeSuccessModal");
+
+    if (closeModalBtn instanceof HTMLButtonElement) {
+      closeModalBtn.addEventListener("click", hideSuccessModal);
+    }
+
+    function hideSuccessModal() {
+      hideModal("#successModal");
+      setTimeout(
+        () => toggleModalFade("successModal"),
+        MODAL_ANIMATION_DURATION_IN_MILLISECONDS
+      );
+    }
+  });
+</script>

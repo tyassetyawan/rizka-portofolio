@@ -2,6 +2,7 @@
 import Card from "./Card.astro";
 
 interface Service {
+  id: number;
   title: string;
   price: number;
   benefits: string[];
@@ -11,7 +12,7 @@ interface Props {
   service: Service;
 }
 
-const { title, benefits, price } = Astro.props.service;
+const { id, title, benefits, price } = Astro.props.service;
 ---
 
 <Card className="card-service h-fit">
@@ -25,7 +26,8 @@ const { title, benefits, price } = Astro.props.service;
     </ul>
   </div>
   <button
-    class="w-full p-2 text-white font-semibold bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-md dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-950 transition-all duration-300"
+    data-service-id={id}
+    class="hireServiceButton w-full p-2 text-white font-semibold bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:outline-hidden focus:ring-blue-300 rounded-md dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-950 transition-all duration-300"
   >
     Get Started
   </button>

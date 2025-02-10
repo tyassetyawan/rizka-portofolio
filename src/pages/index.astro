@@ -7,6 +7,7 @@ import CardService from "../components/CardService.astro";
 import EXPERIENCES from "../assets/collections/experiences.json";
 import PROJECTS from "../assets/collections/projects.json";
 import SERVICES from "../assets/collections/services.json";
+import HireServiceModal from "../components/HireServiceModal.astro";
 ---
 
 <Layout>
@@ -39,7 +40,7 @@ import SERVICES from "../assets/collections/services.json";
             </h2>
             <p class="text-gray-600 text-sm sm:text-base dark:text-gray-400">
               Expert in creating dynamic and responsive user interfaces using
-              <span class="text-blue-500 dark:text-blue-700"
+              <span class="text-blue-700 dark:text-blue-500"
                 >Angular and Astro</span
               >. I bring your designs to life with clean, efficient, and
               maintainable code.
@@ -64,7 +65,7 @@ import SERVICES from "../assets/collections/services.json";
             </h2>
             <p class="text-gray-600 text-sm sm:text-base dark:text-gray-400">
               Skilled in building robust and scalable server-side applications
-              with <span class="text-yellow-500 dark:text-yellow-700"
+              with <span class="text-yellow-700 dark:text-yellow-500"
                 >NestJS and Express</span
               >. I ensure your backend is secure, efficient, and seamlessly
               integrated with your frontend.
@@ -83,19 +84,23 @@ import SERVICES from "../assets/collections/services.json";
     <article class="flex flex-col md:flex-row gap-4 p-4">
       <Card className="text-gray-600 dark:text-gray-400 h-fit">
         <div class="flex flex-col gap-2 text-sm sm:text-base">
+          <h3
+            class="text-lg sm:text-xl font-semibold text-gray-950 dark:text-white"
+          >
+            Short Bio 🧬
+          </h3>
           <p>
-            Previously, I worked on building a website for selling top-ups,
-            recharges, and gift cards where I implemented and developed several
-            APIs and the payment gateway PAYCOMET.
-          </p>
-          <p>
-            I participated in No Country Laboral Simulation as a Backend
-            Developer using NestJS and had the opportunity to support the team
-            in the frontend with Angular.
+            I'm an experienced FullStack Web Developer focused on the NestJS and
+            Angular ecosystem. I'm compromised with the quality of the code and
+            the reliability of the websites I build.
           </p>
           <p>
             Currently, I'm developing a personal project called ThemeMarket, a
             free templates marketplace for developers.
+          </p>
+          <p>
+            I like to share my knowledge with the community so I often make
+            tutorials in my YouTube channel.
           </p>
         </div>
         <div class="flex flex-col gap-2">
@@ -109,7 +114,7 @@ import SERVICES from "../assets/collections/services.json";
             role="button"
             aria-label="Download CV"
             download
-            class="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-800 dark:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-950 text-white w-fit font-semibold"
+            class="px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-800 dark:bg-blue-700 focus:ring-4 focus:outline-hidden focus:ring-blue-200 dark:focus:ring-blue-950 text-white w-fit font-semibold"
             >Download CV</a
           >
         </div>
@@ -152,7 +157,7 @@ import SERVICES from "../assets/collections/services.json";
       <a
         role="button"
         href="/projects"
-        class="font-semibold transition-colors px-4 py-2 text-base rounded-3xl bg-blue-500 hover:bg-transparent hover:border hover:border-blue-500 hover:text-blue-500 dark:bg-blue-800 text-white dark:hover:bg-transparent dark:hover:border-blue-800 dark:hover:text-blue-800 duration-300"
+        class="font-semibold transition-colors px-4 py-2 text-base rounded-3xl bg-blue-600 hover:bg-transparent hover:border hover:border-blue-600 hover:text-blue-600 dark:bg-blue-800 text-white dark:hover:bg-transparent dark:hover:border-blue-800 dark:hover:text-blue-800 duration-300"
         >See All Projects</a
       >
     </div>
@@ -167,6 +172,7 @@ import SERVICES from "../assets/collections/services.json";
       {SERVICES.map((service) => <CardService service={service} />)}
     </article>
   </section>
+  <HireServiceModal />
 </Layout>
 
 <script>
