@@ -1,10 +1,7 @@
-<div
-  id="errorModalFade"
-  class="fixed top-0 left-0 inset-0 hidden justify-center size-full z-50"
->
+<button id="openErrorModalBtn" class="hidden"></button>
+<div id="errorModal" class="hidden">
   <div
-    id="errorModal"
-    class="bg-white rounded-md dark:bg-gray-950 w-80 xs:w-96 flex flex-col p-6 h-fit mt-16"
+    class="bg-white rounded-md dark:bg-gray-950 w-80 xs:w-96 flex flex-col p-6 h-fit mt-16 mx-auto"
   >
     <div
       class="size-12 rounded-full bg-red-100 dark:bg-red-900 p-2 flex items-center justify-center mx-auto mb-3.5"
@@ -35,31 +32,24 @@
     </button>
   </div>
 </div>
-<div
-  id="errorModalBackdrop"
-  class="hidden fixed top-0 left-0 inset-0 z-40 bg-gray-950/50"
->
-</div>
 <script>
-  import {
-    hideModal,
-    toggleModalFade,
-    MODAL_ANIMATION_DURATION_IN_MILLISECONDS,
-  } from "../utils/modal";
+  import { Modal } from "../utils/modal";
 
   window.addEventListener("DOMContentLoaded", () => {
     const closeModalBtn = document.getElementById("closeErrorModal");
+    const openModalBtn = document.getElementById("openErrorModalBtn");
+    const errorModal = new Modal("errorModal");
 
     if (closeModalBtn instanceof HTMLButtonElement) {
-      closeModalBtn.addEventListener("click", hideErrorModal);
+      closeModalBtn.addEventListener("click", () => {
+        errorModal.hide();
+      });
     }
 
-    function hideErrorModal() {
-      hideModal("#errorModal");
-      setTimeout(
-        () => toggleModalFade("errorModal"),
-        MODAL_ANIMATION_DURATION_IN_MILLISECONDS
-      );
+    if (openModalBtn instanceof HTMLButtonElement) {
+      openModalBtn.addEventListener("click", () => {
+        errorModal.show();
+      });
     }
   });
 </script>

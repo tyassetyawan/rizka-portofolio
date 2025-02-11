@@ -1,38 +1,57 @@
 import { animate } from "motion/mini";
 
-export const MODAL_ANIMATION_DURATION_IN_MILLISECONDS = 200;
+const MODAL_ANIMATION_DURATION_IN_MS = 200;
 
-const animationOptions = {
-  duration: MODAL_ANIMATION_DURATION_IN_MILLISECONDS / 1000,
-};
+export class Modal {
+  private animationOptions = {
+    duration: MODAL_ANIMATION_DURATION_IN_MS / 1000,
+  };
+  private modalEl: HTMLElement;
+  private backdrop = document.createElement("div");
 
-export function showModal(selector: string) {
-  animate(
-    selector,
-    {
-      scale: [0, 1],
-      opacity: [0, 1],
-    },
-    animationOptions
-  );
-}
+  constructor(elementOrId: HTMLElement | string) {
+    const el =
+      elementOrId instanceof HTMLElement
+        ? elementOrId
+        : document.getElementById(elementOrId);
 
-export function hideModal(selector: string) {
-  animate(
-    selector,
-    {
-      scale: [1, 0],
-      opacity: [1, 0],
-    },
-    animationOptions
-  );
-}
+    if (!el) {
+      throw new Error(`Modal Element not found`);
+    }
 
-export function toggleModalFade(modalId: string) {
-  const backdrop = document.getElementById(`${modalId}Backdrop`)!;
-  const modalFade = document.getElementById(`${modalId}Fade`)!;
+    el.classList.add("hidden", "fixed", "top-0", "left-0", "w-full", "z-50");
 
-  modalFade.classList.toggle("hidden");
-  modalFade.classList.toggle("grid");
-  backdrop.classList.toggle("hidden");
+    this.modalEl = el;
+    this.backdrop.className = "fixed top-0 left-0 inset-0 z-40 bg-gray-950/50";
+  }
+
+  show() {
+    document.body.appendChild(this.backdrop);
+    this.modalEl.classList.remove("hidden");
+
+    animate(
+      this.modalEl,
+      {
+        scale: [0, 1],
+        opacity: [0, 1],
+      },
+      this.animationOptions
+    );
+  }
+
+  hide() {
+    animate(
+      this.modalEl,
+      {
+        scale: [1, 0],
+        opacity: [1, 0],
+      },
+      this.animationOptions
+    );
+
+    setTimeout(() => {
+      document.body.removeChild(this.backdrop);
+      this.modalEl.classList.add("hidden");
+    }, MODAL_ANIMATION_DURATION_IN_MS);
+  }
 }

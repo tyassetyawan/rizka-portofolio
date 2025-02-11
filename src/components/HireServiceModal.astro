@@ -3,13 +3,9 @@ import ErrorModal from "./ErrorModal.astro";
 import SuccessModal from "./SuccessModal.astro";
 ---
 
-<div
-  id="hireServiceModalFade"
-  class="fixed top-0 left-0 inset-0 hidden justify-center size-full z-50"
->
+<div id="hireServiceModal" class="hidden">
   <div
-    id="hireServiceModal"
-    class="bg-white rounded-md dark:bg-gray-950 w-80 xs:w-96 sm:w-[512px] md:w-[640px] flex flex-col p-6 h-fit mt-16"
+    class="bg-white rounded-md dark:bg-gray-950 w-80 xs:w-96 sm:w-[512px] md:w-[640px] flex flex-col p-6 h-fit mt-16 mx-auto"
   >
     <div class="flex justify-between items-center">
       <h2
@@ -67,41 +63,32 @@ import SuccessModal from "./SuccessModal.astro";
     </form>
   </div>
 </div>
-<div
-  id="hireServiceModalBackdrop"
-  class="hidden fixed top-0 left-0 inset-0 z-40 bg-gray-950/50"
->
-</div>
 <SuccessModal />
 <ErrorModal />
 
 <script>
   import { actions } from "astro:actions";
-  import {
-    showModal,
-    hideModal,
-    toggleModalFade,
-    MODAL_ANIMATION_DURATION_IN_MILLISECONDS,
-  } from "../utils/modal";
+  import { Modal } from "../utils/modal";
 
   window.addEventListener("DOMContentLoaded", () => {
     const hireServiceButtons = document.getElementsByClassName(
       "hireServiceButton"
     ) as HTMLCollectionOf<HTMLElement>;
+    const hireServiceModal = new Modal("hireServiceModal");
 
     for (const button of hireServiceButtons) {
       button.addEventListener("click", () => {
         localStorage.setItem("currentServiceId", button.dataset.serviceId!);
-
-        toggleModalFade("hireServiceModal");
-        showModal("#hireServiceModal");
+        hireServiceModal.show();
       });
     }
 
     const closeModalBtn = document.getElementById("closeScheduleMeetingModal");
 
     if (closeModalBtn instanceof HTMLButtonElement) {
-      closeModalBtn.addEventListener("click", hideHireServiceModal);
+      closeModalBtn.addEventListener("click", () => {
+        hireServiceModal.hide();
+      });
     }
 
     const scheduleMeetingForm = document.getElementById("scheduleMeetingForm");
@@ -116,26 +103,16 @@ import SuccessModal from "./SuccessModal.astro";
 
         const { error } = await actions.hireService(formData);
 
-        hideHireServiceModal();
+        hireServiceModal.hide();
 
         if (!error) {
-          toggleModalFade("successModal");
-          showModal("#successModal");
+          document.getElementById("openSuccessModalBtn")?.click();
         } else {
-          toggleModalFade("errorModal");
-          showModal("#errorModal");
+          document.getElementById("openErrorModalBtn")?.click();
         }
 
         scheduleMeetingForm.reset();
       });
-    }
-
-    function hideHireServiceModal() {
-      hideModal("#hireServiceModal");
-      setTimeout(
-        () => toggleModalFade("hireServiceModal"),
-        MODAL_ANIMATION_DURATION_IN_MILLISECONDS
-      );
     }
   });
 </script>

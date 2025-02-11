@@ -1,9 +1,6 @@
-<div
-  id="successModalFade"
-  class="fixed top-0 left-0 inset-0 hidden justify-center size-full z-50"
->
+<button id="openSuccessModalBtn" class="hidden"></button>
+<div id="successModal" class="hidden">
   <div
-    id="successModal"
     class="bg-white rounded-md dark:bg-gray-950 w-80 xs:w-96 flex flex-col p-6 h-fit mt-16"
   >
     <div
@@ -35,31 +32,24 @@
     </button>
   </div>
 </div>
-<div
-  id="successModalBackdrop"
-  class="hidden fixed top-0 left-0 inset-0 z-40 bg-gray-950/50"
->
-</div>
 <script>
-  import {
-    hideModal,
-    toggleModalFade,
-    MODAL_ANIMATION_DURATION_IN_MILLISECONDS,
-  } from "../utils/modal";
+  import { Modal } from "../utils/modal";
 
   window.addEventListener("DOMContentLoaded", () => {
     const closeModalBtn = document.getElementById("closeSuccessModal");
+    const openSuccessModalBtn = document.getElementById("openSuccessModalBtn");
+    const successModal = new Modal("successModal");
 
     if (closeModalBtn instanceof HTMLButtonElement) {
-      closeModalBtn.addEventListener("click", hideSuccessModal);
+      closeModalBtn.addEventListener("click", () => {
+        successModal.hide();
+      });
     }
 
-    function hideSuccessModal() {
-      hideModal("#successModal");
-      setTimeout(
-        () => toggleModalFade("successModal"),
-        MODAL_ANIMATION_DURATION_IN_MILLISECONDS
-      );
+    if (openSuccessModalBtn instanceof HTMLButtonElement) {
+      openSuccessModalBtn.addEventListener("click", () => {
+        successModal.show();
+      });
     }
   });
 </script>
