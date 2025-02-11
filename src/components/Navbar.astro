@@ -115,68 +115,66 @@ if (pathname == "/") {
   </nav>
 </header>
 <script is:inline>
-  window.addEventListener("DOMContentLoaded", () => {
-    const navbar = document.getElementById("navbar");
-    const navbarToggle = document.getElementById("navbar-toggle");
-    const navbarXIcon = document.getElementById("navbar-x-icon");
-    const navbarMenuIcon = document.getElementById("navbar-menu-icon");
+  const navbar = document.getElementById("navbar");
+  const navbarToggle = document.getElementById("navbar-toggle");
+  const navbarXIcon = document.getElementById("navbar-x-icon");
+  const navbarMenuIcon = document.getElementById("navbar-menu-icon");
 
-    if (navbarToggle instanceof HTMLButtonElement) {
-      navbarToggle.addEventListener("click", () => {
-        navbarXIcon.classList.toggle("hidden");
-        navbarMenuIcon.classList.toggle("hidden");
+  if (navbarToggle instanceof HTMLButtonElement) {
+    navbarToggle.addEventListener("click", () => {
+      navbarXIcon.classList.toggle("hidden");
+      navbarMenuIcon.classList.toggle("hidden");
 
-        navbar.classList.toggle("hidden");
+      navbar.classList.toggle("hidden");
 
-        setTimeout(() => {
-          navbar.classList.toggle("-translate-y-[200%]");
-        });
+      setTimeout(() => {
+        navbar.classList.toggle("-translate-y-[200%]");
       });
-    }
+    });
+  }
 
-    const themeToggle = document.getElementById("theme-toggle");
-    const themeMoonIcon = document.getElementById("theme-moon-icon");
-    const themeSunIcon = document.getElementById("theme-sun-icon");
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeMoonIcon = document.getElementById("theme-moon-icon");
+  const themeSunIcon = document.getElementById("theme-sun-icon");
 
-    const isDarkColorThemeSet =
-      "color-theme" in localStorage &&
-      localStorage.getItem("color-theme") === "dark";
-    const userPrefersDarkTheme =
-      window.matchMedia("(prefers-color-scheme: dark)").matches &&
-      !("color-theme" in localStorage);
+  const isDarkColorThemeSet =
+    "color-theme" in localStorage &&
+    localStorage.getItem("color-theme") === "dark";
+  const userPrefersDarkTheme =
+    window.matchMedia("(prefers-color-scheme: dark)").matches &&
+    !("color-theme" in localStorage);
 
-    if (isDarkColorThemeSet || userPrefersDarkTheme) {
-      setDarkTheme();
-    } else {
-      setLightTheme();
-    }
+  if (isDarkColorThemeSet || userPrefersDarkTheme) {
+    setDarkTheme();
+  } else {
+    setLightTheme();
+  }
 
-    if (themeToggle instanceof HTMLButtonElement) {
-      themeToggle.addEventListener("click", () => {
-        const colorTheme = localStorage.getItem("color-theme");
+  if (themeToggle instanceof HTMLButtonElement) {
+    themeToggle.addEventListener("click", () => {
+      const colorTheme = localStorage.getItem("color-theme");
 
-        if (colorTheme === "dark") {
-          setLightTheme();
-        } else {
-          setDarkTheme();
-        }
-      });
-    }
+      if (colorTheme === "dark") {
+        setLightTheme();
+      } else {
+        setDarkTheme();
+      }
+    });
+  }
 
-    function setLightTheme() {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("color-theme", "light");
+  function setLightTheme() {
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("color-theme", "light");
 
-      themeMoonIcon.classList.remove("hidden");
-      themeSunIcon.classList.add("hidden");
-    }
+    themeMoonIcon.classList.remove("hidden");
+    themeSunIcon.classList.add("hidden");
+  }
 
-    function setDarkTheme() {
-      localStorage.setItem("color-theme", "dark");
-      document.documentElement.classList.add("dark");
+  function setDarkTheme() {
+    localStorage.setItem("color-theme", "dark");
+    document.documentElement.classList.add("dark");
 
-      themeMoonIcon.classList.add("hidden");
-      themeSunIcon.classList.remove("hidden");
-    }
-  });
+    themeMoonIcon.classList.add("hidden");
+    themeSunIcon.classList.remove("hidden");
+  }
 </script>
