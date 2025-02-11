@@ -46,6 +46,8 @@ export const server = {
       });
 
       const { error } = await resend.emails.send({
+        /* This is just because I'm using free plan, you can setup a domain 
+        on your resend account to send emails from there */
         from: "Portfolio <onboarding@resend.dev>",
         to: [MY_EMAIL],
         subject: "New Service Hired!",
