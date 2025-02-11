@@ -74,7 +74,9 @@ import SuccessModal from "./SuccessModal.astro";
 </div>
 <SuccessModal />
 <ErrorModal />
+
 <script>
+  import { actions } from "astro:actions";
   import {
     showModal,
     hideModal,
@@ -112,21 +114,11 @@ import SuccessModal from "./SuccessModal.astro";
         const formData = new FormData(scheduleMeetingForm);
         formData.append("serviceId", serviceId);
 
-        /* const res = await fetch(`/api/services/hire`, {
-          method: "POST",
-          body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }); */
+        const { error } = await actions.hireService(formData);
 
         hideHireServiceModal();
 
-        const res = {
-          ok: undefined,
-        };
-
-        if (res.ok) {
+        if (!error) {
           toggleModalFade("successModal");
           showModal("#successModal");
         } else {
