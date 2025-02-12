@@ -22,7 +22,7 @@ export class Modal {
     el.classList.add("hidden", "fixed", "top-0", "left-0", "w-full", "z-50");
 
     this.modalEl = el;
-    this.backdrop.className = "fixed top-0 left-0 inset-0 z-40 bg-gray-950/50";
+    this.backdrop.classList.add("backdrop");
   }
 
   show() {
