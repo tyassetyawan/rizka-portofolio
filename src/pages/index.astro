@@ -179,23 +179,6 @@ import HireServiceModal from "../components/HireServiceModal.astro";
   import { animate, inView, stagger } from "motion";
 
   window.addEventListener("DOMContentLoaded", () => {
-    const sectionsIds = ["#about", "#projects"];
-
-    for (const sectionId of sectionsIds) {
-      inView(sectionId, () => {
-        animate(
-          sectionId,
-          {
-            opacity: [0, 1],
-            transform: ["translateY(40%)", "translateY(0)"],
-          },
-          {
-            duration: 1,
-          }
-        );
-      });
-    }
-
     inView("#services", () => {
       animate(
         ".card-service",
